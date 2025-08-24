@@ -1,0 +1,33 @@
+{
+  "name": "sitely-website",
+  "version": "1.0.0",
+  "description": "A modern, responsive website for Sitely web development agency",
+  "main": "index.html",
+  "scripts": {
+    "start": "python -m http.server 8000",
+    "serve": "python -m http.server 8000",
+    "dev": "python -m http.server 8000",
+    "deploy": "bash deploy.sh",
+    "deploy:cf": "wrangler pages deploy . --project-name=sitely-website"
+  },
+  "keywords": [
+    "website",
+    "web-development",
+    "agency",
+    "responsive",
+    "modern-design",
+    "html",
+    "css",
+    "javascript"
+  ],
+  "author": "Sitely Team",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/sitely-website.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yourusername/sitely-website/issues"
+  },
+  "homepage": "https://yourusername.github.io/sitely-website"
+}

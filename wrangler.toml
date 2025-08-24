@@ -1,0 +1,19 @@
+name = "sitely-website"
+compatibility_date = "2024-01-01"
+
+[site]
+bucket = "./"
+
+[env.production]
+name = "sitely-website"
+
+[env.staging]
+name = "sitely-website-staging"
+
+# Performance optimizations
+[env.production.vars]
+ENVIRONMENT = "production"
+
+# Analytics (optional)
+# [env.production.analytics_engine_datasets]
+# sitely_analytics = { binding = "SITELY_ANALYTICS" }
