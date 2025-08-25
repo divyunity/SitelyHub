@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const leadForm = document.querySelector('.form-card form');
     
     if (leadForm) {
-        leadForm.addEventListener('submit', function(e) {
+        leadForm.addEventListener('submit', async function(e) {
             e.preventDefault();
             
             // Get form data
@@ -52,10 +52,19 @@ document.addEventListener('DOMContentLoaded', function() {
                 showNotification('Please fill in all fields', 'error');
                 return;
             }
-            
-            // Simulate form submission
-            showNotification('Thank you! We\'ll get back to you soon.', 'success');
-            this.reset();
+            try {
+                const resp = await fetch('/api/contact', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ type: 'lead', name, email, service, message })
+                });
+                const data = await resp.json();
+                if (!resp.ok || !data.ok) throw new Error(data.error || 'Failed');
+                showNotification('Thanks! We\'ll get back to you soon.', 'success');
+                this.reset();
+            } catch (err) {
+                showNotification('Could not send. Please try again later.', 'error');
+            }
         });
     }
 
@@ -192,7 +201,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Handle form submission
     if (quoteForm) {
-        quoteForm.addEventListener('submit', function(e) {
+        quoteForm.addEventListener('submit', async function(e) {
             e.preventDefault();
             const formData = new FormData(this);
             const packageType = formData.get('package') || 'unspecified';
@@ -208,19 +217,23 @@ document.addEventListener('DOMContentLoaded', function() {
                 showNotification('Please complete name, email, and problem.', 'error');
                 return;
             }
-
-            const subject = encodeURIComponent(`Quote request: ${packageType} - ${fullName}`);
-            const body = encodeURIComponent(
-                `Name: ${fullName}\nEmail: ${workEmail}\nCompany: ${company}\nWebsite: ${website}\nPackage: ${packageType}\nTimeline: ${timeline}\nBudget: ${budget}\n\nProblem / Goals:\n${problem}`
-            );
-            window.location.href = `mailto:info@sitelyhub.com?subject=${subject}&body=${body}`;
-
-            // Close modal quickly
-            if (quoteModal) {
-                quoteModal.classList.remove('show');
-                document.body.style.overflow = '';
+            try {
+                const resp = await fetch('/api/contact', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ type: 'quote', packageType, fullName, workEmail, company, website, problem, timeline, budget })
+                });
+                const data = await resp.json();
+                if (!resp.ok || !data.ok) throw new Error(data.error || 'Failed');
+                showNotification('Sent! We\'ll reply within 24 hours.', 'success');
+                if (quoteModal) {
+                    quoteModal.classList.remove('show');
+                    document.body.style.overflow = '';
+                }
+                this.reset();
+            } catch (err) {
+                showNotification('Could not send. Please try again later.', 'error');
             }
-            this.reset();
         });
     }
     
@@ -320,7 +333,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Basic contact form handling
     if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
+        contactForm.addEventListener('submit', async function(e) {
             e.preventDefault();
             const formData = new FormData(contactForm);
             const fullName = formData.get('fullName') || '';
@@ -333,13 +346,20 @@ document.addEventListener('DOMContentLoaded', function() {
                 showNotification('Please complete name, email, and message.', 'error');
                 return;
             }
-            const subject = encodeURIComponent(`Contact: ${topic} - ${fullName}`);
-            const body = encodeURIComponent(
-                `Name: ${fullName}\nEmail: ${email}\nCompany: ${company}\nPhone: ${phone}\nTopic: ${topic}\n\nMessage:\n${message}`
-            );
-            window.location.href = `mailto:info@sitelyhub.com?subject=${subject}&body=${body}`;
-            closeContact();
-            contactForm.reset();
+            try {
+                const resp = await fetch('/api/contact', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ type: 'contact', fullName, email, company, phone, topic, message })
+                });
+                const data = await resp.json();
+                if (!resp.ok || !data.ok) throw new Error(data.error || 'Failed');
+                showNotification('Thanks! We\'ll get back within one business day.', 'success');
+                closeContact();
+                contactForm.reset();
+            } catch (err) {
+                showNotification('Could not send. Please try again later.', 'error');
+            }
         });
     }
 });
