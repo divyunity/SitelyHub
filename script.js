@@ -56,19 +56,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 showNotification('Please fill in all fields', 'error');
                 return;
             }
-            try {
-                const resp = await fetch('/api/contact', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ type: 'lead', name, email, service, message })
-                });
-                const data = await resp.json();
-                if (!resp.ok || !data.ok) throw new Error(data.error || 'Failed');
-                showNotification('Thanks! We\'ll get back to you soon.', 'success');
-                this.reset();
-            } catch (err) {
-                showNotification('Could not send. Please try again later.', 'error');
-            }
+            const subject = encodeURIComponent(`Homepage inquiry: ${service} - ${name}`);
+            const body = encodeURIComponent(
+                `Name: ${name}\nEmail: ${email}\nService: ${service}\n\nMessage:\n${message}`
+            );
+            const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=info@sitelyhub.com&su=${subject}&body=${body}`;
+            window.open(gmailUrl, '_blank');
+            this.reset();
         });
     }
 
