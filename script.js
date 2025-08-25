@@ -1,5 +1,9 @@
 // Smooth scrolling for navigation links
 document.addEventListener('DOMContentLoaded', function() {
+    // Ensure no modal auto-opens on reload
+    const anyModals = document.querySelectorAll('.modal');
+    anyModals.forEach(m => m.classList.remove('show'));
+    document.body.style.overflow = '';
     // Smooth scrolling for navigation links
     const navLinks = document.querySelectorAll('a[href^="#"]');
     
