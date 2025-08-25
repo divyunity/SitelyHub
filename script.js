@@ -33,11 +33,11 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Form submission handling
-    const contactForm = document.querySelector('.form-card form');
+    // Lead form (hero) submission handling
+    const leadForm = document.querySelector('.form-card form');
     
-    if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
+    if (leadForm) {
+        leadForm.addEventListener('submit', function(e) {
             e.preventDefault();
             
             // Get form data
@@ -162,13 +162,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const closeModal = document.getElementById('closeModal');
     const quoteForm = document.getElementById('quoteForm');
     
-    // Show modal on page load with a slight delay
-    setTimeout(() => {
-        if (quoteModal) {
-            quoteModal.classList.add('show');
-            document.body.style.overflow = 'hidden'; // Prevent background scrolling
-        }
-    }, 2000); // 2 second delay
+    // Disable auto-opening of quote modal on page load
     
     // Close modal functionality
     if (closeModal) {
@@ -200,57 +194,50 @@ document.addEventListener('DOMContentLoaded', function() {
     if (quoteForm) {
         quoteForm.addEventListener('submit', function(e) {
             e.preventDefault();
-            
-            // Get form data
             const formData = new FormData(this);
-            const packageType = formData.get('package');
-            const fullName = formData.get('fullName');
-            const workEmail = formData.get('workEmail');
-            const company = formData.get('company');
-            const website = formData.get('website');
-            const problem = formData.get('problem');
-            const timeline = formData.get('timeline');
-            const budget = formData.get('budget');
-            
-            // Simple validation
-            if (!fullName || !workEmail || !company || !problem || !timeline || !budget) {
-                showNotification('Please fill in all required fields', 'error');
+            const packageType = formData.get('package') || 'unspecified';
+            const fullName = formData.get('fullName') || '';
+            const workEmail = formData.get('workEmail') || '';
+            const company = formData.get('company') || '';
+            const website = formData.get('website') || '';
+            const problem = formData.get('problem') || '';
+            const timeline = formData.get('timeline') || '';
+            const budget = formData.get('budget') || '';
+
+            if (!fullName || !workEmail || !problem) {
+                showNotification('Please complete name, email, and problem.', 'error');
                 return;
             }
-            
-            // Simulate form submission
-            showNotification('Thank you! We\'ll get back to you within 24 hours.', 'success');
-            
-            // Close modal after successful submission
-            setTimeout(() => {
+
+            const subject = encodeURIComponent(`Quote request: ${packageType} - ${fullName}`);
+            const body = encodeURIComponent(
+                `Name: ${fullName}\nEmail: ${workEmail}\nCompany: ${company}\nWebsite: ${website}\nPackage: ${packageType}\nTimeline: ${timeline}\nBudget: ${budget}\n\nProblem / Goals:\n${problem}`
+            );
+            window.location.href = `mailto:info@sitelyhub.com?subject=${subject}&body=${body}`;
+
+            // Close modal quickly
+            if (quoteModal) {
                 quoteModal.classList.remove('show');
                 document.body.style.overflow = '';
-            }, 2000);
-            
-            // Reset form
-            this.reset();
-            
-            // Reset package selection to Basic
-            const basicPackage = this.querySelector('input[value="basic"]');
-            if (basicPackage) {
-                basicPackage.checked = true;
             }
+            this.reset();
         });
     }
     
-    // Add click handlers for all "Get a Quote" buttons to open modal
-    const allQuoteButtons = document.querySelectorAll('.btn-primary, .btn-white');
-    allQuoteButtons.forEach(button => {
-        if (button.textContent.toLowerCase().includes('quote')) {
-            button.addEventListener('click', function(e) {
-                e.preventDefault();
-                if (quoteModal) {
-                    quoteModal.classList.add('show');
-                    document.body.style.overflow = 'hidden';
-                }
-            });
-        }
-    });
+    // Global: Any button/link mentioning quote or contact opens Contact modal
+    function attachGlobalContactOpeners() {
+        const candidates = document.querySelectorAll('a, button');
+        candidates.forEach(el => {
+            const text = (el.textContent || '').toLowerCase();
+            if (text.includes('quote') || text.includes('contact')) {
+                el.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    openContact();
+                });
+            }
+        });
+    }
+    attachGlobalContactOpeners();
     
     // Package selection visual feedback
     const packageOptions = document.querySelectorAll('.package-option input[type="radio"]');
@@ -286,6 +273,75 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Initialize info panels
     updateInfoPanels('basic');
+
+    // Contact Modal Functionality (shared across pages)
+    const contactModal = document.getElementById('contactModal');
+    const contactClose = document.getElementById('contactClose');
+    const contactBack = document.getElementById('contactBack');
+    const contactForm = document.getElementById('contactForm');
+
+    function openContact() {
+        if (!contactModal) return;
+        // Ensure quote modal is closed if it was auto-opened elsewhere
+        if (quoteModal && quoteModal.classList && quoteModal.classList.contains('show')) {
+            quoteModal.classList.remove('show');
+        }
+        contactModal.classList.add('show');
+        document.body.style.overflow = 'hidden';
+    }
+    function closeContact() {
+        if (!contactModal) return;
+        contactModal.classList.remove('show');
+        document.body.style.overflow = '';
+    }
+
+    // Openers
+    const contactOpeners = document.querySelectorAll('[data-open-contact]');
+    contactOpeners.forEach(el => {
+        el.addEventListener('click', function(e) {
+            e.preventDefault();
+            openContact();
+        });
+    });
+
+    // Close handlers
+    if (contactClose) contactClose.addEventListener('click', function(e){ e.preventDefault(); closeContact(); });
+    if (contactBack) contactBack.addEventListener('click', function(e){ e.preventDefault(); closeContact(); });
+    if (contactModal) {
+        contactModal.addEventListener('click', function(e) {
+            if (e.target === contactModal) closeContact();
+        });
+    }
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && contactModal && contactModal.classList.contains('show')) {
+            closeContact();
+        }
+    });
+
+    // Basic contact form handling
+    if (contactForm) {
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const formData = new FormData(contactForm);
+            const fullName = formData.get('fullName') || '';
+            const email = formData.get('email') || '';
+            const company = formData.get('company') || '';
+            const phone = formData.get('phone') || '';
+            const topic = formData.get('topic') || 'project';
+            const message = formData.get('message') || '';
+            if (!fullName || !email || !message) {
+                showNotification('Please complete name, email, and message.', 'error');
+                return;
+            }
+            const subject = encodeURIComponent(`Contact: ${topic} - ${fullName}`);
+            const body = encodeURIComponent(
+                `Name: ${fullName}\nEmail: ${email}\nCompany: ${company}\nPhone: ${phone}\nTopic: ${topic}\n\nMessage:\n${message}`
+            );
+            window.location.href = `mailto:info@sitelyhub.com?subject=${subject}&body=${body}`;
+            closeContact();
+            contactForm.reset();
+        });
+    }
 });
 
 // Notification system
@@ -382,5 +438,22 @@ document.addEventListener('DOMContentLoaded', function() {
     
     processNumbers.forEach(number => {
         numberObserver.observe(number);
+    });
+
+    // Recent Work: click/keyboard to open embedded links
+    const workItems = document.querySelectorAll('.work-item[data-link]');
+    function openWorkLink(el){
+        const url = el.getAttribute('data-link');
+        if (url) window.open(url, '_blank', 'noopener');
+    }
+    workItems.forEach(item => {
+        item.style.cursor = 'pointer';
+        item.addEventListener('click', () => openWorkLink(item));
+        item.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                openWorkLink(item);
+            }
+        });
     });
 });

@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>How We Work — The Full Process | Sitely</title>
+    <meta name="description" content="Sitely's end‑to‑end process from discovery to design, build, QA, launch, and ongoing care.">
+    <link rel="canonical" href="https://sitelyhub.com/process.html">
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -15,10 +17,10 @@
             <div class="logo">Sitely</div>
             <nav class="nav">
                 <a href="index.html" class="nav-link">Home</a>
-                <a href="index.html#services" class="nav-link">Services</a>
+                <a href="services.html" class="nav-link">Services</a>
                 <a href="index.html#portfolio" class="nav-link">Portfolio</a>
                 <a href="index.html#about" class="nav-link">About</a>
-                <a href="index.html#contact" class="nav-link">Contact</a>
+                <a href="#" class="nav-link" data-open-contact>Contact</a>
             </nav>
             <button class="btn btn-primary">Get a Quote</button>
         </div>
@@ -292,10 +294,10 @@
                 <div class="footer-logo">Sitely</div>
                 <nav class="footer-nav">
                     <a href="index.html">Home</a>
-                    <a href="index.html#services">Services</a>
+                    <a href="services.html">Services</a>
                     <a href="index.html#portfolio">Portfolio</a>
                     <a href="index.html#about">About</a>
-                    <a href="index.html#contact">Contact</a>
+                    <a href="#" data-open-contact>Contact</a>
                 </nav>
                 <div class="footer-social">
                     <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
@@ -305,6 +307,61 @@
             </div>
         </div>
     </footer>
+
+    <!-- Contact Modal -->
+    <div id="contactModal" class="modal" aria-hidden="true">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title">
+                    <i class="fas fa-envelope"></i>
+                    <h2>Contact Sitely</h2>
+                </div>
+                <p class="modal-subtitle">We'll get back within one business day. Share the essentials.</p>
+                <button class="modal-close" id="contactClose"><i class="fas fa-times"></i><span>Close</span></button>
+            </div>
+            <form class="contact-form" id="contactForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="cFullName">Full name</label>
+                        <input type="text" id="cFullName" name="fullName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="cEmail">Work email</label>
+                        <input type="email" id="cEmail" name="email" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="cCompany">Company (optional)</label>
+                        <input type="text" id="cCompany" name="company">
+                    </div>
+                    <div class="form-group">
+                        <label for="cPhone">Phone (optional)</label>
+                        <input type="tel" id="cPhone" name="phone">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>How can we help?</label>
+                    <div class="option-buttons">
+                        <label class="option-button"><input type="radio" name="topic" value="project" checked><span>Project inquiry</span></label>
+                        <label class="option-button"><input type="radio" name="topic" value="support"><span>Support</span></label>
+                        <label class="option-button"><input type="radio" name="topic" value="partnership"><span>Partnership</span></label>
+                        <label class="option-button"><input type="radio" name="topic" value="other"><span>Other</span></label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="cMessage">Message</label>
+                    <textarea id="cMessage" name="message" rows="5" required></textarea>
+                </div>
+                <div class="form-footer">
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary" id="contactBack">Back</button>
+                        <button type="submit" class="btn btn-primary"><i class="fas fa-paper-plane"></i> Send Message</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
 
     <script src="script.js"></script>
     <script src="process.js"></script>

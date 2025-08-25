@@ -185,6 +185,13 @@ body {
     font-size: 1rem;
 }
 
+/* Ensure dropdown option items are readable on open lists */
+.form-card select option,
+.form-group select option {
+    color: #0A1128;
+    background-color: #ffffff;
+}
+
 .form-card input::placeholder,
 .form-card textarea::placeholder {
     color: #B8C5D6;
@@ -1027,6 +1034,35 @@ body {
     opacity: 1;
 }
 
+/* Compact Contact Modal (fits on a single frame, no scrolling) */
+#contactModal { padding: 10px; }
+#contactModal .modal-content {
+    max-width: 480px;
+    width: 95%;
+    max-height: none;
+    overflow: hidden;
+}
+#contactModal .modal-header { padding: 1rem 1rem 0.75rem; }
+#contactModal .modal-title i { font-size: 1.1rem; }
+#contactModal .modal-title h2 { font-size: 1.25rem; }
+#contactModal .modal-subtitle { font-size: 0.9rem; opacity: 0.85; }
+#contactModal .contact-form { padding: 0.75rem 1rem 1rem; }
+#contactModal .form-row { grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+#contactModal .form-group { margin-bottom: 0.5rem; }
+#contactModal .form-group input,
+#contactModal .form-group textarea { padding: 8px 10px; }
+#contactModal .option-button span { padding: 6px 10px; font-size: 0.8rem; }
+#contactModal .contact-form textarea { height: 64px; }
+#contactModal .form-footer { margin-top: 0.75rem; padding-top: 0.75rem; }
+#contactModal .form-actions { gap: 0.75rem; }
+#contactModal .btn { padding: 8px 14px; font-size: 0.9rem; }
+
+/* Compact modal responsive tweak */
+@media (max-width: 640px) {
+    #contactModal .form-row { grid-template-columns: 1fr; }
+    #contactModal .modal-content { max-width: 520px; }
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
     .hero-content {
@@ -1153,6 +1189,99 @@ body {
         justify-content: center;
     }
 }
+
+/* Services Page */
+.services-page .services-hero {
+    padding: 120px 0 40px;
+    background-color: #0A1128;
+}
+.services-page .page-title {
+    font-size: 3rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 0.75rem;
+}
+.services-page .page-subtitle { color: #B8C5D6; }
+
+.services-catalog { background-color: #0F1A2E; padding: 60px 0; }
+.catalog-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; }
+.catalog-card { display: grid; grid-template-columns: auto 1fr auto; gap: 1rem; align-items: start; padding: 1.25rem; background: rgba(255,255,255,0.03); border: 1px solid rgba(0,212,255,0.1); border-radius: 12px; text-decoration: none; color: #B8C5D6; transition: transform .2s ease, box-shadow .2s ease; }
+.catalog-card:hover { transform: translateY(-4px); box-shadow: 0 20px 40px rgba(0,212,255,0.1); }
+.catalog-card h3 { color: #fff; margin-bottom: .25rem; font-size: 1.2rem; }
+.catalog-icon { width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 8px; background: linear-gradient(135deg, #00D4FF, #0099CC); color: #0A1128; }
+.catalog-meta { color: #8fbad0; font-weight: 600; }
+
+.packages-section { background-color: #0A1128; padding: 70px 0; }
+.packages-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+.package-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(0,212,255,0.1); border-radius: 12px; padding: 1.5rem; }
+.package-card.featured { border-color: #00D4FF; box-shadow: 0 20px 40px rgba(0,212,255,0.15); }
+.package-head { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: .75rem; }
+.package-head h3 { color: #fff; font-size: 1.3rem; }
+.package-head .price { color: #00D4FF; font-weight: 700; }
+.package-list { list-style: none; margin: 1rem 0; padding: 0; }
+.package-list li { position: relative; padding-left: 1.25rem; margin-bottom: .6rem; color: #B8C5D6; }
+.package-list li:before { content: "✓"; position: absolute; left: 0; color: #00D4FF; font-weight: 700; }
+.package-actions { display: flex; gap: .75rem; }
+
+.addons-section { background-color: #0F1A2E; padding: 60px 0; }
+.addons-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; }
+.addon-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(0,212,255,0.1); border-radius: 12px; padding: 1rem; }
+
+/* Services groups and badges */
+.service-group { background: rgba(255,255,255,0.03); border: 1px solid rgba(0,212,255,0.1); border-radius: 12px; padding: 1rem; margin-bottom: 1rem; }
+.service-group h3 { color: #8fbad0; font-size: 1rem; margin-bottom: .75rem; letter-spacing: .2px; }
+.badge-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: .75rem; }
+.badge { display: inline-block; padding: 10px 12px; border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.02); border-radius: 8px; color: #B8C5D6; font-size: .9rem; text-decoration: none; }
+.badge:hover { border-color: #00D4FF; color: #fff; background: rgba(0,212,255,0.08); }
+
+/* Sidebar counts */
+.process-nav-item .nav-count { margin-left: auto; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12); color: #8fbad0; font-size: 0.75rem; font-weight: 600; padding: 2px 8px; border-radius: 999px; }
+.process-nav-item.active .nav-count { background: #ffffff; color: #0A1128; border-color: #ffffff; }
+
+/* Force packages into a single horizontal row */
+.packages-section .packages-grid {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 1rem;
+    overflow: hidden;
+}
+.packages-section .package-card {
+    flex: 1 1 25%;
+    min-width: 0;
+    padding: 1rem;
+}
+
+/* Ensure exactly four cards fit the row */
+.packages-section .packages-grid > .package-card { width: 25%; }
+
+@media (max-width: 900px) {
+    .packages-section .package-card { padding: 0.75rem; }
+    .packages-section .packages-grid { gap: 0.75rem; }
+}
+
+/* Force pure white text within Services page/components */
+.process-page .page-subtitle,
+.process-page .process-details,
+.process-page .phase-header p,
+.process-page .service-group h3,
+.process-page .service-group p,
+.process-page .phase-checklist li,
+.process-page .phase-quote p,
+.process-page .metrics-table th,
+.process-page .metrics-table td,
+.process-page .badge,
+.process-page .process-nav-item,
+.packages-section,
+.packages-section .package-card,
+.packages-section .package-list li,
+.addons-section,
+.addons-section .addon-card {
+    color: #ffffff;
+}
+
+.process-page .badge { color: #ffffff; }
+.process-page .process-nav-item { color: #ffffff; }
+.packages-section .price { color: #ffffff; }
 
 @media (max-width: 480px) {
     .hero-title {

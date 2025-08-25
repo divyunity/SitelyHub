@@ -4,9 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sitely - Web Development Agency</title>
+    <meta name="description" content="Sitely builds fast, beautiful, SEO‑friendly websites, Shopify stores, landing pages, and SaaS products that grow your business.">
+    <meta name="robots" content="index,follow">
+    <link rel="canonical" href="https://sitelyhub.com/">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Sitely - Web Development Agency">
+    <meta property="og:description" content="Fast, beautiful, SEO‑friendly websites, Shopify, landing pages, and SaaS products.">
+    <meta property="og:url" content="https://sitelyhub.com/">
+    <meta property="og:image" content="https://sitelyhub.com/ChatGPT%20Image%20Aug%2023,%202025,%2007_56_11%20PM.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Sitely - Web Development Agency">
+    <meta name="twitter:description" content="Fast, beautiful, SEO‑friendly websites, Shopify, landing pages, and SaaS products.">
+    <meta name="twitter:image" content="https://sitelyhub.com/ChatGPT%20Image%20Aug%2023,%202025,%2007_56_11%20PM.png">
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Sitely",
+      "url": "https://sitelyhub.com/",
+      "logo": "https://sitelyhub.com/ChatGPT%20Image%20Aug%2023,%202025,%2007_56_11%20PM.png"
+    }
+    </script>
 </head>
 <body>
     <!-- Header -->
@@ -15,11 +36,11 @@
             <div class="logo">Sitely</div>
             <nav class="nav">
                 <a href="#home" class="nav-link">Home</a>
-                <a href="#services" class="nav-link">Services</a>
+                <a href="services.html" class="nav-link">Services</a>
                 <a href="#portfolio" class="nav-link">Portfolio</a>
                 <a href="process.html" class="nav-link">Process</a>
                 <a href="#about" class="nav-link">About</a>
-                <a href="#contact" class="nav-link">Contact</a>
+                <a href="#" class="nav-link" data-open-contact>Contact</a>
             </nav>
             <button class="btn btn-primary">Get a Quote</button>
         </div>
@@ -36,7 +57,7 @@
                         <span>that grow your business</span>
                     </h1>
                     <p class="hero-subtitle">
-                        Consectetur focused design, clean code, and SEO-based is. Esthere that and managed for you.
+                        Conversion‑focused design, clean code, and SEO‑ready sites. We handle everything for you.
                     </p>
                     <div class="hero-buttons">
                         <button class="btn btn-primary">Get free quote</button>
@@ -98,6 +119,20 @@
                     <h3>Website Care & SEO</h3>
                     <p>Updates, monitoring, and on-page SEO so your site stays fast, secure, and visible.</p>
                 </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fab fa-shopify"></i>
+                    </div>
+                    <h3>Shopify Development</h3>
+                    <p>Custom Shopify themes, optimized PDP/PLP, apps, and checkout integrations that convert.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-cloud"></i>
+                    </div>
+                    <h3>SaaS Product Development</h3>
+                    <p>Design and build MVPs and full‑stack SaaS with modern UX, auth, billing, and dashboards.</p>
+                </div>
             </div>
         </div>
     </section>
@@ -134,13 +169,13 @@
         <div class="container">
             <h2 class="section-title">Recent Work</h2>
             <div class="work-grid">
-                <div class="work-item">
+                <div class="work-item" data-link="https://vfxrange.com" role="link" tabindex="0">
                     <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=300&fit=crop" alt="Website Design">
                 </div>
-                <div class="work-item">
+                <div class="work-item" data-link="https://cginsight.in" role="link" tabindex="0">
                     <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=400&h=300&fit=crop" alt="Creative Design">
                 </div>
-                <div class="work-item">
+                <div class="work-item" data-link="https://example.com/work-3" role="link" tabindex="0">
                     <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=300&fit=crop" alt="Architecture">
                 </div>
             </div>
@@ -182,7 +217,7 @@
         <div class="container">
             <div class="about-content">
                 <div class="about-image">
-                    <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786?w=400&h=400&fit=crop&crop=face" alt="Founder">
+                    <img src="./ChatGPT%20Image%20Aug%2023,%202025,%2007_56_11%20PM.png" alt="Sitely Logo">
                 </div>
                 <div class="about-text">
                     <h2>About Sitely</h2>
@@ -212,11 +247,11 @@
                 <div class="footer-logo">Sitely</div>
                 <nav class="footer-nav">
                     <a href="#home">Home</a>
-                    <a href="#services">Services</a>
+                    <a href="services.html">Services</a>
                     <a href="#portfolio">Portfolio</a>
                     <a href="process.html">Process</a>
                     <a href="#about">About</a>
-                    <a href="#contact">Contact</a>
+                    <a href="#" data-open-contact>Contact</a>
                 </nav>
             </div>
         </div>
@@ -362,6 +397,64 @@
                             <i class="fas fa-paper-plane"></i>
                             Request Quote
                         </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Contact Modal -->
+    <div id="contactModal" class="modal" aria-hidden="true">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title">
+                    <i class="fas fa-envelope"></i>
+                    <h2>Contact Sitely</h2>
+                </div>
+                <p class="modal-subtitle">We'll get back within one business day. Share the essentials.</p>
+                <button class="modal-close" id="contactClose">
+                    <i class="fas fa-times"></i>
+                    <span>Close</span>
+                </button>
+            </div>
+            <form class="contact-form" id="contactForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="cFullName">Full name</label>
+                        <input type="text" id="cFullName" name="fullName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="cEmail">Work email</label>
+                        <input type="email" id="cEmail" name="email" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="cCompany">Company (optional)</label>
+                        <input type="text" id="cCompany" name="company">
+                    </div>
+                    <div class="form-group">
+                        <label for="cPhone">Phone (optional)</label>
+                        <input type="tel" id="cPhone" name="phone">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>How can we help?</label>
+                    <div class="option-buttons">
+                        <label class="option-button"><input type="radio" name="topic" value="project" checked><span>Project inquiry</span></label>
+                        <label class="option-button"><input type="radio" name="topic" value="support"><span>Support</span></label>
+                        <label class="option-button"><input type="radio" name="topic" value="partnership"><span>Partnership</span></label>
+                        <label class="option-button"><input type="radio" name="topic" value="other"><span>Other</span></label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="cMessage">Message</label>
+                    <textarea id="cMessage" name="message" rows="5" required></textarea>
+                </div>
+                <div class="form-footer">
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary" id="contactBack">Back</button>
+                        <button type="submit" class="btn btn-primary"><i class="fas fa-paper-plane"></i> Send Message</button>
                     </div>
                 </div>
             </form>
