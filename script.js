@@ -2,7 +2,7 @@
 document.addEventListener('DOMContentLoaded', function() {
     // Ensure no modal auto-opens on reload
     const anyModals = document.querySelectorAll('.modal');
-    anyModals.forEach(m => m.classList.remove('show'));
+    anyModals.forEach(m => { m.classList.remove('show'); m.setAttribute('aria-hidden','true'); });
     document.body.style.overflow = '';
     // Smooth scrolling for navigation links
     const navLinks = document.querySelectorAll('a[href^="#"]');
@@ -221,23 +221,17 @@ document.addEventListener('DOMContentLoaded', function() {
                 showNotification('Please complete name, email, and problem.', 'error');
                 return;
             }
-            try {
-                const resp = await fetch('/api/contact', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ type: 'quote', packageType, fullName, workEmail, company, website, problem, timeline, budget })
-                });
-                const data = await resp.json();
-                if (!resp.ok || !data.ok) throw new Error(data.error || 'Failed');
-                showNotification('Sent! We\'ll reply within 24 hours.', 'success');
-                if (quoteModal) {
-                    quoteModal.classList.remove('show');
-                    document.body.style.overflow = '';
-                }
-                this.reset();
-            } catch (err) {
-                showNotification('Could not send. Please try again later.', 'error');
+            const subject = encodeURIComponent(`Quote request: ${packageType} - ${fullName}`);
+            const body = encodeURIComponent(
+                `Name: ${fullName}\nWork Email: ${workEmail}\nCompany: ${company}\nWebsite: ${website}\nPackage: ${packageType}\nTimeline: ${timeline}\nBudget: ${budget}\n\nProblem / Goals:\n${problem}`
+            );
+            const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=info@sitelyhub.com&su=${subject}&body=${body}`;
+            window.open(gmailUrl, '_blank');
+            if (quoteModal) {
+                quoteModal.classList.remove('show');
+                document.body.style.overflow = '';
             }
+            this.reset();
         });
     }
     
@@ -304,11 +298,13 @@ document.addEventListener('DOMContentLoaded', function() {
             quoteModal.classList.remove('show');
         }
         contactModal.classList.add('show');
+        contactModal.setAttribute('aria-hidden','false');
         document.body.style.overflow = 'hidden';
     }
     function closeContact() {
         if (!contactModal) return;
         contactModal.classList.remove('show');
+        contactModal.setAttribute('aria-hidden','true');
         document.body.style.overflow = '';
     }
 
@@ -350,20 +346,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 showNotification('Please complete name, email, and message.', 'error');
                 return;
             }
-            try {
-                const resp = await fetch('/api/contact', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ type: 'contact', fullName, email, company, phone, topic, message })
-                });
-                const data = await resp.json();
-                if (!resp.ok || !data.ok) throw new Error(data.error || 'Failed');
-                showNotification('Thanks! We\'ll get back within one business day.', 'success');
-                closeContact();
-                contactForm.reset();
-            } catch (err) {
-                showNotification('Could not send. Please try again later.', 'error');
-            }
+            const subject = encodeURIComponent(`Contact: ${topic} - ${fullName}`);
+            const body = encodeURIComponent(
+                `Name: ${fullName}\nEmail: ${email}\nCompany: ${company}\nPhone: ${phone}\nTopic: ${topic}\n\nMessage:\n${message}`
+            );
+            const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=info@sitelyhub.com&su=${subject}&body=${body}`;
+            window.open(gmailUrl, '_blank');
+            closeContact();
+            contactForm.reset();
         });
     }
 });
