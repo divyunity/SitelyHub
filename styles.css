@@ -1352,6 +1352,39 @@ body {
 /* Desktop: Hide mobile menu overlay */
 .mobile-menu-overlay {
     display: none !important;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    z-index: 999 !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+}
+
+/* Mobile Menu Toggle Button */
+.mobile-menu-toggle {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    color: #ffffff;
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 6px;
+    transition: background-color 0.3s ease;
+}
+
+.mobile-menu-toggle:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.mobile-menu-toggle.active {
+    background: rgba(0, 212, 255, 0.2);
+    color: #00D4FF;
 }
 
 /* Mobile-specific Contact Modal Styles */
@@ -1478,23 +1511,14 @@ body {
         transition: background-color 0.3s ease;
     }
     
-    /* Hide mobile menu overlay on desktop */
-    .mobile-menu-overlay {
-        display: none !important;
-    }
-    
-    .mobile-menu-toggle:hover {
-        background: rgba(255, 255, 255, 0.1);
-    }
-    
-    .mobile-menu-toggle.active {
-        background: rgba(0, 212, 255, 0.2);
-        color: #00D4FF;
+    /* Mobile Menu Toggle - Show on mobile */
+    .mobile-menu-toggle {
+        display: flex !important;
     }
     
     /* Mobile Menu Overlay */
     .mobile-menu-overlay {
-        display: none;
+        display: none !important;
         position: fixed;
         top: 0;
         left: 0;
@@ -1508,6 +1532,9 @@ body {
     
     .mobile-menu-overlay.show {
         display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        pointer-events: auto !important;
     }
     
     .mobile-menu-header {

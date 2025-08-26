@@ -151,17 +151,25 @@ document.addEventListener('DOMContentLoaded', function() {
     mobileMenuToggle.style.display = 'none';
     
     const headerContainer = document.querySelector('.header .container');
-    headerContainer.appendChild(mobileMenuToggle);
+    if (headerContainer) {
+        headerContainer.appendChild(mobileMenuToggle);
+        console.log('Mobile menu toggle added to header');
+    } else {
+        console.log('Header container not found');
+    }
     
     const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
     const mobileMenuClose = document.getElementById('mobileMenuClose');
     
     // Show mobile menu toggle on small screens
     function checkMobile() {
+        console.log('Checking mobile, window width:', window.innerWidth);
         if (window.innerWidth <= 768) {
             mobileMenuToggle.style.display = 'flex';
+            console.log('Mobile menu toggle shown');
         } else {
             mobileMenuToggle.style.display = 'none';
+            console.log('Mobile menu toggle hidden');
             // Close mobile menu when screen size increases
             if (mobileMenuOverlay) {
                 mobileMenuOverlay.classList.remove('show');
@@ -177,10 +185,14 @@ document.addEventListener('DOMContentLoaded', function() {
     // Mobile menu toggle functionality
     if (mobileMenuToggle) {
         mobileMenuToggle.addEventListener('click', function() {
+            console.log('Mobile menu toggle clicked');
             if (mobileMenuOverlay) {
                 mobileMenuOverlay.classList.add('show');
                 mobileMenuToggle.classList.add('active');
                 document.body.style.overflow = 'hidden';
+                console.log('Mobile menu opened');
+            } else {
+                console.log('Mobile menu overlay not found');
             }
         });
     }
