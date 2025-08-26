@@ -1,0 +1,18 @@
+name = "sitely-website"
+compatibility_date = "2024-01-01"
+
+# Static site configuration
+[site]
+bucket = "."
+
+# Main environment
+[env.production]
+name = "sitely-website"
+
+# Staging environment
+[env.staging]
+name = "sitely-website-staging"
+
+# Build configuration for static site
+[build]
+command = "echo 'Static site - no build required'"
