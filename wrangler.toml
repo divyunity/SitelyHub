@@ -8,15 +8,14 @@ entry-point = "functions"
 
 [env.production]
 name = "sitely-website"
-vars = { RESEND_API_KEY = "${RESEND_API_KEY}" }
+vars = { 
+  RESEND_API_KEY = "${RESEND_API_KEY}",
+  ENVIRONMENT = "production"
+}
 
 [env.staging]
 name = "sitely-website-staging"
 vars = { RESEND_API_KEY = "${RESEND_API_KEY}" }
-
-# Performance optimizations
-[env.production.vars]
-ENVIRONMENT = "production"
 
 # Build optimizations
 [build]
