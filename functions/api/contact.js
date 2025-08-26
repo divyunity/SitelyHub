@@ -19,7 +19,7 @@ export async function onRequestPost(context) {
       }
     }
 
-    const toEmail = 'info@sitelyhub.com';
+    const toEmails = ['cginsight18@gmail.com'];
     const subject = buildSubject(type, data);
     const text = buildBody(type, data);
 
@@ -36,7 +36,7 @@ export async function onRequestPost(context) {
       },
       body: JSON.stringify({
         from: 'Sitely <no-reply@sitelyhub.com>',
-        to: [toEmail],
+        to: toEmails,
         subject,
         text,
         reply_to: data.email || data.workEmail || undefined

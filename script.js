@@ -60,7 +60,8 @@ document.addEventListener('DOMContentLoaded', function() {
             const body = encodeURIComponent(
                 `Name: ${name}\nEmail: ${email}\nService: ${service}\n\nMessage:\n${message}`
             );
-            const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=info@sitelyhub.com&su=${subject}&body=${body}`;
+            const toEmails = encodeURIComponent('cginsight18@gmail.com');
+            const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${toEmails}&su=${subject}&body=${body}`;
             window.open(gmailUrl, '_blank');
             this.reset();
         });
@@ -143,7 +144,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Mobile menu toggle (for future mobile menu implementation)
+    // Mobile menu functionality
     const mobileMenuToggle = document.createElement('button');
     mobileMenuToggle.className = 'mobile-menu-toggle';
     mobileMenuToggle.innerHTML = '<i class="fas fa-bars"></i>';
@@ -152,17 +153,80 @@ document.addEventListener('DOMContentLoaded', function() {
     const headerContainer = document.querySelector('.header .container');
     headerContainer.appendChild(mobileMenuToggle);
     
+    const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
+    const mobileMenuClose = document.getElementById('mobileMenuClose');
+    
     // Show mobile menu toggle on small screens
     function checkMobile() {
         if (window.innerWidth <= 768) {
-            mobileMenuToggle.style.display = 'block';
+            mobileMenuToggle.style.display = 'flex';
         } else {
             mobileMenuToggle.style.display = 'none';
+            // Close mobile menu when screen size increases
+            if (mobileMenuOverlay) {
+                mobileMenuOverlay.classList.remove('show');
+                mobileMenuToggle.classList.remove('active');
+                document.body.style.overflow = '';
+            }
         }
     }
     
     checkMobile();
     window.addEventListener('resize', checkMobile);
+    
+    // Mobile menu toggle functionality
+    if (mobileMenuToggle) {
+        mobileMenuToggle.addEventListener('click', function() {
+            if (mobileMenuOverlay) {
+                mobileMenuOverlay.classList.add('show');
+                mobileMenuToggle.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+        });
+    }
+    
+    // Mobile menu close functionality
+    if (mobileMenuClose) {
+        mobileMenuClose.addEventListener('click', function() {
+            if (mobileMenuOverlay) {
+                mobileMenuOverlay.classList.remove('show');
+                mobileMenuToggle.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+    }
+    
+    // Close mobile menu when clicking outside
+    if (mobileMenuOverlay) {
+        mobileMenuOverlay.addEventListener('click', function(e) {
+            if (e.target === mobileMenuOverlay) {
+                mobileMenuOverlay.classList.remove('show');
+                mobileMenuToggle.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+    }
+    
+    // Close mobile menu with Escape key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && mobileMenuOverlay && mobileMenuOverlay.classList.contains('show')) {
+            mobileMenuOverlay.classList.remove('show');
+            mobileMenuToggle.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+    });
+    
+    // Close mobile menu when clicking on navigation links
+    const mobileMenuLinks = document.querySelectorAll('.mobile-menu-nav a');
+    mobileMenuLinks.forEach(link => {
+        link.addEventListener('click', function() {
+            if (mobileMenuOverlay) {
+                mobileMenuOverlay.classList.remove('show');
+                mobileMenuToggle.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+    });
     
     // Quote Modal Functionality
     const quoteModal = document.getElementById('quoteModal');
@@ -219,7 +283,8 @@ document.addEventListener('DOMContentLoaded', function() {
             const body = encodeURIComponent(
                 `Name: ${fullName}\nWork Email: ${workEmail}\nCompany: ${company}\nWebsite: ${website}\nPackage: ${packageType}\nTimeline: ${timeline}\nBudget: ${budget}\n\nProblem / Goals:\n${problem}`
             );
-            const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=info@sitelyhub.com&su=${subject}&body=${body}`;
+            const toEmails = encodeURIComponent('cginsight18@gmail.com');
+            const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${toEmails}&su=${subject}&body=${body}`;
             window.open(gmailUrl, '_blank');
             if (quoteModal) {
                 quoteModal.classList.remove('show');
@@ -344,7 +409,8 @@ document.addEventListener('DOMContentLoaded', function() {
             const body = encodeURIComponent(
                 `Name: ${fullName}\nEmail: ${email}\nCompany: ${company}\nPhone: ${phone}\nTopic: ${topic}\n\nMessage:\n${message}`
             );
-            const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=info@sitelyhub.com&su=${subject}&body=${body}`;
+            const toEmails = encodeURIComponent('cginsight18@gmail.com');
+            const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${toEmails}&su=${subject}&body=${body}`;
             window.open(gmailUrl, '_blank');
             closeContact();
             contactForm.reset();
