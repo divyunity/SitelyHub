@@ -1,8 +1,10 @@
 name = "sitely-website"
 compatibility_date = "2024-01-01"
+compatibility_flags = ["nodejs_compat"]
 
 [site]
 bucket = "./"
+entry-point = "functions"
 
 [env.production]
 name = "sitely-website"
@@ -16,6 +18,19 @@ vars = { RESEND_API_KEY = "${RESEND_API_KEY}" }
 [env.production.vars]
 ENVIRONMENT = "production"
 
+# Build optimizations
+[build]
+command = "echo 'No build step required for static site'"
+
+# Asset optimization
+[env.production.site]
+bucket = "./"
+
 # Analytics (optional)
 # [env.production.analytics_engine_datasets]
 # sitely_analytics = { binding = "SITELY_ANALYTICS" }
+
+# Custom domains (if needed)
+# [[env.production.routes]]
+# pattern = "sitelyhub.com/*"
+# zone_name = "sitelyhub.com"

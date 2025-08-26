@@ -1,0 +1,17 @@
+# Redirects for Cloudflare Pages
+# Handle common redirects and improve SEO
+
+# Redirect www to non-www (if needed)
+# www.sitelyhub.com/* https://sitelyhub.com/:splat 301
+
+# Redirect old URLs to new ones (if any)
+# /old-page /new-page 301
+
+# Handle trailing slashes
+/* /:splat 200
+
+# API redirects
+/api/* /functions/api/:splat 200
+
+# SPA fallback for client-side routing
+/* /index.html 200
